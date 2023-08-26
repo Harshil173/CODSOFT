@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            width: 350px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .display {
+            width: 100%;
+            height: 60px;
+            font-size: 28px;
+            text-align: right;
+            padding: 10px;
+            background-color: #eee;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .button {
+            width: 100%;
+            height: 70px;
+            font-size: 28px;
+            cursor: pointer;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background-color: #ddd;
+        }
+
+        /* Styling for the special buttons */
+        .button.operator {
+            background-color: #f66;
+            color: #fff;
+        }
+
+        .button.clear {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .button.equals {
+            background-color: #33cc33;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="button-grid">
+            <div class="button clear" onclick="clearDisplay()">C</div>
+            <div class="button" onclick="appendToDisplay('7')">7</div>
+            <div class="button" onclick="appendToDisplay('8')">8</div>
+            <div class="button" onclick="appendToDisplay('9')">9</div>
+            <div class="button operator" onclick="appendToDisplay('+')">+</div>
+            <div class="button" onclick="appendToDisplay('4')">4</div>
+            <div class="button" onclick="appendToDisplay('5')">5</div>
+            <div class="button" onclick="appendToDisplay('6')">6</div>
+            <div class="button operator" onclick="appendToDisplay('-')">-</div>
+            <div class="button" onclick="appendToDisplay('1')">1</div>
+            <div class="button" onclick="appendToDisplay('2')">2</div>
+            <div class="button" onclick="appendToDisplay('3')">3</div>
+            <div class="button operator" onclick="appendToDisplay('*')">*</div>
+            <div class="button" onclick="appendToDisplay('0')">0</div>
+            <div class="button equals" onclick="calculateResult()">=</div>
+            <div class="button operator" onclick="appendToDisplay('/')">/</div>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById("display");
+        let input = '';
+
+        function appendToDisplay(value) {
+            if (input === '0' && value !== 'C') {
+                input = value;
+            } else {
+                input += value;
+            }
+            display.textContent = input;
+        }
+
+        function clearDisplay() {
+            input = '';
+            display.textContent = '0';
+        }
+
+        function calculateResult() {
+            try {
+                input = eval(input).toString();
+                display.textContent = input;
+            } catch (error) {
+                input = '';
+                display.textContent = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
